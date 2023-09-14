@@ -1,5 +1,4 @@
 const express = require('express');
-// const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { generateUserData } = require('../utils/helpers');
@@ -35,7 +34,6 @@ router.post('/signUp', [
         });
       }
       //   ...generateUserData(),
-      // const hashedPassword = await bcrypt.hash(password, 12);
       const newUser = await User.create({
         ...req.body,
         password: hashedPassword,
@@ -83,11 +81,6 @@ router.post('/signInWithPassword', [
           },
         });
       }
-
-      // const isPasswordEqual = await bcrypt.compare(
-      //   password,
-      //   existingUser.password
-      // );
 
       if (!isPasswordEqual) {
         return res.status(400).send({
